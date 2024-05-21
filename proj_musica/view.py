@@ -3,15 +3,18 @@ from tkinter import FLAT, Button, Canvas, Entry, Frame, Image, Label, messagebox
 from model.musica import *
 from PIL import Image, ImageTk
 from model.users import *
+from model.database import *
 
 
 class View:
     def __init__(self, master):
         self.master = master
+        self.database = DataBase()
         self.users = LinkedListUsers()
         self.master.geometry('800x800')
         self.master.resizable(False, False)
         self.master.title('Login')
+        self.load_clients()
 
         #Frame
         self.frame = tk.Frame(self.master, width=800, height=800, bg='white')
@@ -83,6 +86,10 @@ class View:
                                     activebackground="#0F5B37", fg="white", command=self.registar)
         self.sign_button.place(x=550, y=640)
 
+        self.destryo = tk.Button(self.login_janela, text="Destroy DATABASE", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", 
+                                    activebackground="#0F5B37", fg="white", command=self.delete_database)
+        self.destryo.place(x=550, y=680)
+
     def registar(self):
             self.frame.destroy()
             tela = tk.Toplevel(self.master)
@@ -106,7 +113,7 @@ class View:
             password_confirmar_entry = tk.Entry(frame, show="*", font=('Arial', 14))
             password_confirmar_entry.pack(pady=5)
 
-            registar_button = tk.Button(frame, text="Registar", font=('Arial', 14),fg='white', bg='#6d7575', command= lambda: self.users.add_user(nome_entry.get(), password_entry.get(), password_confirmar_entry.get()))
+            registar_button = tk.Button(frame, text="Registar", font=('Arial', 14),fg='white', bg='#6d7575', command= lambda: self.users.add_user(nome_entry.get(), password_entry.get(), password_confirmar_entry.get(), self.database, 0))
             registar_button.pack(pady=10, ipadx=20, ipady=5)
             
 
@@ -123,3 +130,11 @@ class View:
             return
         self.master.destroy()
         #pagina principal
+    
+    def load_clients(self):
+        for nome, password in self.database.fetch_clientes():
+            self.users.add_user(nome, password, password, self.database, 1)
+    
+    def delete_database(self):
+        for nome, _ in self.database.fetch_clientes():
+            self.database.delete_cliente(nome)
