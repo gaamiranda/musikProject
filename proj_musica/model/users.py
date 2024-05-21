@@ -1,3 +1,6 @@
+import tkinter as tk
+from tkinter import messagebox
+
 class NodeUser:
 	def __init__(self, nome, password):
 		self.nome = nome
@@ -10,12 +13,18 @@ class LinkedListUsers:
 		self.head = None
 	
 	def add_user(self, nome, password, passwordConfirmada):
+		if len(nome) == 0:
+			messagebox.showerror("Erro", "O nome não pode ser nulo!")
+			return
+		if len(password) == 0:
+			messagebox.showerror("Erro", "A password não pode ser nula!")
+			return
 		if self.check_user(nome):
+			messagebox.showerror("Erro", "O nome já existe!")
 			return
-			#messagebox a dizer que ja existe o nome deste utilizador
 		if password != passwordConfirmada:
+			messagebox.showerror("Erro", "As passwords não são iguais!")
 			return
-			#messagebox a dizer que as passwords nao coincidem
 		node = NodeUser(nome, password)
 		temp = self.head
 		if temp == None:
@@ -24,8 +33,8 @@ class LinkedListUsers:
 			while temp.next:
 				temp = temp.next
 			temp.next = node
-		
-	
+		messagebox.showinfo("Registado", "Registado com sucesso!")
+		temp = self.head
 	def check_user(self, nome):
 		temp = self.head
 		while temp:
