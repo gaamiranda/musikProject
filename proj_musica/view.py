@@ -86,9 +86,9 @@ class View:
                                     activebackground="#0F5B37", fg="white", command=self.registar)
         self.sign_button.place(x=550, y=640)
 
-        self.destryo = tk.Button(self.login_janela, text="Destroy DATABASE", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", 
-                                    activebackground="#0F5B37", fg="white", command=self.delete_database)
-        self.destryo.place(x=550, y=680)
+        #self.destryo = tk.Button(self.login_janela, text="Destroy DATABASE", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", 
+                                    #activebackground="#0F5B37", fg="white", command=self.delete_database)
+        #self.destryo.place(x=550, y=680)
 
     def registar(self):
             self.frame.destroy()
@@ -118,17 +118,20 @@ class View:
             
 
     def login(self, nome, password):
-        temp = self.users.head
-        while temp:
-            if temp.nome == nome and temp.password == password:
-                messagebox.showinfo("Login", "Login efetuado com sucesso!")
-                break
-            else:
-                temp = temp.next
-        if temp == None:
-            messagebox.showerror("Erro", "Utilizador ou password erradas!")
-            return
-        self.master.destroy()
+        if nome == "admin" and password == "admin":
+            self.login_admin()
+        else:
+            temp = self.users.head
+            while temp:
+                if temp.nome == nome and temp.password == password:
+                    messagebox.showinfo("Login", "Login efetuado com sucesso!")
+                    break
+                else:
+                    temp = temp.next
+            if temp == None:
+                messagebox.showerror("Erro", "Utilizador ou password erradas!")
+                return
+            self.master.destroy()
         #pagina principal
     
     def load_clients(self):
@@ -136,5 +139,14 @@ class View:
             self.users.add_user(nome, password, password, self.database, 1)
     
     def delete_database(self):
-        for nome, _ in self.database.fetch_clientes():
-            self.database.delete_cliente(nome)
+        for nome, passwd in self.database.fetch_clientes():
+            if nome != "admin":
+                self.database.delete_cliente(nome)
+    
+    def login_admin(self):
+        new_window = tk.Toplevel(self.master)
+        new_window.title("Admin Panel")
+        new_window.geometry('300x200')
+        self.destryo = tk.Button(new_window, text="Destroy DATABASE", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", 
+                                    activebackground="#0F5B37", fg="white", command=self.delete_database)
+        self.destryo.pack()
