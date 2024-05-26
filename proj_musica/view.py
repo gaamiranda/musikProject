@@ -1,9 +1,12 @@
 import tkinter as tk
-from tkinter import FLAT, Button, Canvas, Entry, Frame, Image, Label, messagebox
+from tkinter import *
+from tkinter.ttk import Progressbar
 from model.musica import *
 from PIL import Image, ImageTk
 from model.users import *
 from model.database import *
+
+
 
 
 class View:
@@ -11,6 +14,8 @@ class View:
         self.master = master
         self.database = DataBase()
         self.users = LinkedListUsers()
+        img = PhotoImage(file= "icon.png")
+        self.master.iconphoto(False, img)
         self.master.geometry('800x800')
         self.master.resizable(False, False)
         self.master.title('Login')
@@ -131,8 +136,33 @@ class View:
             if temp == None:
                 messagebox.showerror("Erro", "Utilizador ou password erradas!")
                 return
-            self.master.destroy()
+            #self.master.destroy()
         #pagina principal
+        janela_princiapl = tk.Toplevel(self.master)
+        janela_princiapl.title("SpotUal")
+        janela_princiapl.geometry("600x500")
+        img = PhotoImage(file= "icon.png")
+        janela_princiapl.iconphoto(False, img)
+
+        list_box = tk.Listbox(janela_princiapl, width= 50, font=("Arial", 16, "bold"))
+        list_box.pack(pady=10)
+
+        botao_frame = tk.Frame(janela_princiapl)
+        botao_frame.pack(pady=20)
+
+        botao_tras = tk.CTkButton(botao_frame, text="<", width = 50, font= ("Arial", 18, "bold"))
+        botao_tras.pack(side=tk.LEFT, padx= 5)
+        botao_play = tk.CTkButton(botao_frame, text="Play", width = 50, font=("Arial", 18, "bold"))
+        botao_play.pack(side=tk.LEFT, padx= 5)
+        botao_pausa = tk.CTkButton(botao_frame, text="Pause", width = 50, font=("Arial", 18, "bold"))
+        botao_pausa.pack(side=tk.LEFT, padx= 5)
+        botao_next = tk.CTkButton(botao_frame, text=">", width= 50, font=("Arial", 18, "bold"))
+        botao_next.pack(side=tk.LEFT, padx=5)
+
+        progress_bar = Progressbar(janela_princiapl, length=300, mode="determinate")
+        progress_bar.pack(pady= 10)
+
+
     
     def load_clients(self):
         for nome, password in self.database.fetch_clientes():
@@ -150,3 +180,6 @@ class View:
         self.destryo = tk.Button(new_window, text="Destroy DATABASE", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", 
                                     activebackground="#0F5B37", fg="white", command=self.delete_database)
         self.destryo.pack()
+    
+    def muscia_anterior(self):
+        pass
