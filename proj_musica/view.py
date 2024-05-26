@@ -150,13 +150,13 @@ class View:
         botao_frame = tk.Frame(janela_princiapl)
         botao_frame.pack(pady=20)
 
-        botao_tras = tk.CTkButton(botao_frame, text="<", width = 50, font= ("Arial", 18, "bold"))
+        botao_tras = ctk.CTkButton(botao_frame, text="<", width = 50, font= ("Arial", 18, "bold"))
         botao_tras.pack(side=tk.LEFT, padx= 5)
-        botao_play = tk.CTkButton(botao_frame, text="Play", width = 50, font=("Arial", 18, "bold"))
+        botao_play = ctk.CTkButton(botao_frame, text="Play", width = 50, font=("Arial", 18, "bold"))
         botao_play.pack(side=tk.LEFT, padx= 5)
-        botao_pausa = tk.CTkButton(botao_frame, text="Pause", width = 50, font=("Arial", 18, "bold"))
+        botao_pausa = ctk.CTkButton(botao_frame, text="Pause", width = 50, font=("Arial", 18, "bold"))
         botao_pausa.pack(side=tk.LEFT, padx= 5)
-        botao_next = tk.CTkButton(botao_frame, text=">", width= 50, font=("Arial", 18, "bold"))
+        botao_next = ctk.CTkButton(botao_frame, text=">", width= 50, font=("Arial", 18, "bold"))
         botao_next.pack(side=tk.LEFT, padx=5)
 
         progress_bar = Progressbar(janela_princiapl, length=300, mode="determinate")
