@@ -1,4 +1,5 @@
 import tkinter as tk
+import customtkinter as ctk 
 from tkinter import *
 from tkinter.ttk import Progressbar
 from model.musica import *
@@ -14,7 +15,7 @@ class View:
         self.master = master
         self.database = DataBase()
         self.users = LinkedListUsers()
-        img = PhotoImage(file= "icon.png")
+        img = PhotoImage(file= "SpotUal.png")
         self.master.iconphoto(False, img)
         self.master.geometry('800x800')
         self.master.resizable(False, False)
@@ -136,33 +137,34 @@ class View:
             if temp == None:
                 messagebox.showerror("Erro", "Utilizador ou password erradas!")
                 return
+            #pagina principal
+            janela_princiapl = tk.Toplevel(self.master)
+            janela_princiapl.title("SpotUal")
+            janela_princiapl.geometry("600x500")
+            img = PhotoImage(file= "icon.png")
+            janela_princiapl.iconphoto(False, img)
+
+            list_box = tk.Listbox(janela_princiapl, width= 50, font=("Arial", 16, "bold"))
+            list_box.pack(pady=10)
+
+            botao_frame = tk.Frame(janela_princiapl)
+            botao_frame.pack(pady=20)
+
+            botao_tras = ctk.CTkButton(botao_frame, text="<", width = 50, font= ("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white")
+            botao_tras.pack(side=tk.LEFT, padx= 5)
+            botao_play = ctk.CTkButton(botao_frame, text="▶", width = 50, font=("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white")
+            botao_play.pack(side=tk.LEFT, padx= 5)
+            botao_pausa = ctk.CTkButton(botao_frame, text="⏸️", width = 50, font=("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white")
+            botao_pausa.pack(side=tk.LEFT, padx= 5)
+            botao_next = ctk.CTkButton(botao_frame, text=">", width= 50, font=("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white")
+            botao_next.pack(side=tk.LEFT, padx=5)
+
+            progress_bar = Progressbar(janela_princiapl, length=300, mode="determinate")
+            progress_bar.pack(pady= 10)
+
+
             #self.master.destroy()
-        #pagina principal
-        janela_princiapl = tk.Toplevel(self.master)
-        janela_princiapl.title("SpotUal")
-        janela_princiapl.geometry("600x500")
-        img = PhotoImage(file= "icon.png")
-        janela_princiapl.iconphoto(False, img)
-
-        list_box = tk.Listbox(janela_princiapl, width= 50, font=("Arial", 16, "bold"))
-        list_box.pack(pady=10)
-
-        botao_frame = tk.Frame(janela_princiapl)
-        botao_frame.pack(pady=20)
-
-        botao_tras = ctk.CTkButton(botao_frame, text="<", width = 50, font= ("Arial", 18, "bold"))
-        botao_tras.pack(side=tk.LEFT, padx= 5)
-        botao_play = ctk.CTkButton(botao_frame, text="Play", width = 50, font=("Arial", 18, "bold"))
-        botao_play.pack(side=tk.LEFT, padx= 5)
-        botao_pausa = ctk.CTkButton(botao_frame, text="Pause", width = 50, font=("Arial", 18, "bold"))
-        botao_pausa.pack(side=tk.LEFT, padx= 5)
-        botao_next = ctk.CTkButton(botao_frame, text=">", width= 50, font=("Arial", 18, "bold"))
-        botao_next.pack(side=tk.LEFT, padx=5)
-
-        progress_bar = Progressbar(janela_princiapl, length=300, mode="determinate")
-        progress_bar.pack(pady= 10)
-
-
+        
     
     def load_clients(self):
         for nome, password in self.database.fetch_clientes():
