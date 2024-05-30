@@ -1,12 +1,11 @@
 import tkinter as tk
-import customtkinter as ctk
+import customtkinter as ctk 
 from tkinter import *
 from tkinter.ttk import Progressbar
 from model.musica import *
 from PIL import Image, ImageTk
 from model.users import *
 from model.database import *
-from model.spotify import *
 
 
 
@@ -16,7 +15,7 @@ class View:
         self.master = master
         self.database = DataBase()
         self.users = LinkedListUsers()
-        img = PhotoImage(file= "SpotUal.png")
+        img = PhotoImage(file= "proj_musica\SpotUal.png")
         self.master.iconphoto(False, img)
         self.master.geometry('800x800')
         self.master.resizable(False, False)
@@ -31,13 +30,13 @@ class View:
         self.login_janela = tk.Frame(self.master, bg='black', width='800', height='800')
         self.login_janela.place(x=0, y=0)
 
-        self.linhacima = Image.open("linhacima.png")
+        self.linhacima = Image.open("proj_musica\linhacima.png")
         self.linhacima = self.linhacima.resize((800, 100)) #LANCZOS
         self.linhacima = ImageTk.PhotoImage(self.linhacima)
         self.linhacima_label = tk.Label(self.login_janela, image=self.linhacima, bg='#040405')
         self.linhacima_label.place(x=0, y=0)
 
-        self.linhabaixo = Image.open("linhabaixo.png")
+        self.linhabaixo = Image.open("proj_musica\linhabaixo.png")
         self.linhabaixo = self.linhabaixo.resize((800, 100)) #LANCZOS
         self.linhabaixo = ImageTk.PhotoImage(self.linhabaixo)
         self.linhabaixo_label = tk.Label(self.login_janela, image=self.linhabaixo, bg='#040405')
@@ -45,7 +44,7 @@ class View:
 
 
 
-        self.logo_bv = Image.open("emvindo.png")
+        self.logo_bv = Image.open("proj_musica\emvindo.png")
         self.logo_bv = self.logo_bv.resize((300, 100)) #LANCZOS
         self.logo_bv = ImageTk.PhotoImage(self.logo_bv)
         self.logo_bv_label = tk.Label(self.login_janela, image=self.logo_bv, bg='#040405')
@@ -55,13 +54,13 @@ class View:
         self.sign_label = tk.Label (self.login_janela, text="Sign In", bg='#040405', fg='white', font=('Arial', 13, 'bold'))
         self.sign_label.place(x=640, y=370)
 
-        self.logo = Image.open("SpotUal.png")
+        self.logo = Image.open("proj_musica\SpotUal.png")
         self.logo = self.logo.resize((300, 300)) #LANCZOS
         self.logo = ImageTk.PhotoImage(self.logo)
         self.logo_label = tk.Label(self.login_janela, image=self.logo, bg='#040405')
         self.logo_label.place(x=70, y=330)
 
-        self.logo_user = Image.open("iconuser.png")
+        self.logo_user = Image.open("proj_musica\iconuser.png")
         self.logo_user = self.logo_user.resize((80, 80)) #LANCZOS
         self.logo_user = ImageTk.PhotoImage(self.logo_user)
         self.logo_user_label = tk.Label(self.login_janela, image=self.logo_user, bg='#040405')
@@ -79,7 +78,7 @@ class View:
         #Passsword
         self.password_label = tk.Label(self.login_janela, text='Password', relief= 'flat', bg='#040405', fg="#6b6a69", font=('Arial', 13, 'bold'))
         self.password_label.place(x=550, y=500)
-        self.password_pw = tk.Entry(self.login_janela, highlightthickness=0, relief='flat', bg='#040405', fg='#6b6a69', font=('Arial', 12, 'bold'), )
+        self.password_pw = tk.Entry(self.login_janela, highlightthickness=0, relief='flat', bg='#040405', fg='#6b6a69', font=('Arial', 12, 'bold'), show="*" )
         self.password_pw.place(x=580, y=536, width=190)
         self.linha_pw = tk.Canvas(self.login_janela, width=230, height=2.0, bg='white', highlightthickness=0)
         self.linha_pw.place(x=550, y=560)
@@ -143,16 +142,18 @@ class View:
             janela_princiapl = tk.Toplevel(self.master)
             janela_princiapl.title("SpotUal")
             janela_princiapl.geometry("600x500")
-            img = PhotoImage(file= "icon.png")
+            img = PhotoImage(file= "proj_musica\icon.png")
             janela_princiapl.iconphoto(False, img)
             janela_princiapl.protocol("WM_DELETE_WINDOW", self.master.destroy)
 
             list_box = tk.Listbox(janela_princiapl, width= 50, font=("Arial", 16, "bold"))
             list_box.pack(pady=10)
+            list_box.insert(tk.END, "Cantona", "Cinha","Cantona", "Cinha","Cantona", "Cinha","Cantona", "Cinha","Cantona", "Cinha")
+            
+            
 
             botao_frame = tk.Frame(janela_princiapl)
             botao_frame.pack(pady=20)
-
             botao_tras = ctk.CTkButton(botao_frame, text="<", width = 50, font= ("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white")
             botao_tras.pack(side=tk.LEFT, padx= 5)
             botao_play = ctk.CTkButton(botao_frame, text="▶", width = 50, font=("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white")
@@ -161,12 +162,16 @@ class View:
             botao_pausa.pack(side=tk.LEFT, padx= 5)
             botao_next = ctk.CTkButton(botao_frame, text=">", width= 50, font=("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white")
             botao_next.pack(side=tk.LEFT, padx=5)
+            botao_adicionar = ctk.CTkButton(botao_frame, text="🎧", width=50, font=("Arial", 18, "bold"),fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white")
+            botao_adicionar.pack(side=tk.LEFT, padx=5)
 
             progress_bar = Progressbar(janela_princiapl, length=300, mode="determinate")
             progress_bar.pack(pady= 10)
-            spotify_begining()
 
-            #self.master.destroy()
+            botao_playlist = ctk.CTkButton(janela_princiapl, text="Playlist 1", width=50, font=("Arial", 18, "bold"),fg_color="#0F5B37", 
+                                           hover_color="#0F5B37", cursor="hand2", text_color="white", command=self.janela_playlist)
+            botao_playlist.pack(side=tk.LEFT, padx=5)
+            
         
     
     def load_clients(self):
@@ -186,5 +191,7 @@ class View:
                                     activebackground="#0F5B37", fg="white", command=self.delete_database)
         self.destryo.pack()
     
-    def muscia_anterior(self):
-        pass
+    def janela_playlist(self):
+        jani = tk.Toplevel(self.master)
+        jani.title("Playlist 1")
+        jani.geometry('300x200')
