@@ -77,6 +77,8 @@ class LinkedListFila:
 			new_index = list_box.get(0, tk.END).index(self.current.musica)
 			list_box.selection_set(new_index)
 			list_box.see(new_index)
+			list_box.focus_set()
+			list_box.activate(new_index)
 
 	def next_song(self, list_box):
 		if self.current and self.current.next:
@@ -86,6 +88,8 @@ class LinkedListFila:
 			new_index = list_box.get(0, tk.END).index(self.current.musica)
 			list_box.selection_set(new_index)
 			list_box.see(new_index)
+			list_box.focus_set()
+			list_box.activate(new_index)
 
 	def prev_song(self, list_box):
 		if self.current and self.current.prev:
@@ -95,6 +99,8 @@ class LinkedListFila:
 			new_index = list_box.get(0, tk.END).index(self.current.musica)
 			list_box.selection_set(new_index)
 			list_box.see(new_index)
+			list_box.focus_set()
+			list_box.activate(new_index)
 
 	def pause_song(self):
 		spoti_pause()
