@@ -1,6 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from tkinter import messagebox
+
 def spoti_play(uri):
 
 	sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="a2656aab5a0f45d1b73d45d80f8cf09d",
@@ -46,3 +47,6 @@ def spoti_resume():
 		exit()
 
 	sp.start_playback(device_id=device_id)
+
+def get_artist_name(uri):
+	pass

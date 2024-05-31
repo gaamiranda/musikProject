@@ -152,25 +152,24 @@ class View:
 
             list_box = tk.Listbox(janela_princiapl, width= 50, font=("Arial", 16, "bold"))
             list_box.pack(pady=10)
-            list_box.insert(tk.END, "Cantona", "Cinha","Qualquer-feira", "Pé no Mar","Alô", "No Fumo No Trabajo (Skit)","Habibi", "Hello","Hennessy", "Direção Paris")
+            list_box.insert(tk.END, "Cantona", "Cinha","Qualquer-Feira", "Pé no Mar","Alô", "No Fumo No Trabajo (Skit)","Habibi", "Hello","Hennessy", "Direção Paris")
             
             
 
             botao_frame = tk.Frame(janela_princiapl)
             botao_frame.pack(pady=20)
-            botao_tras = ctk.CTkButton(botao_frame, text="<", width = 50, font= ("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.musicas_iniciais.prev_song())
+            botao_tras = ctk.CTkButton(botao_frame, text="<", width = 50, font= ("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.musicas_iniciais.prev_song(list_box))
             botao_tras.pack(side=tk.LEFT, padx= 5)
             botao_play = ctk.CTkButton(botao_frame, text="▶", width = 50, font=("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.musicas_iniciais.play_song(list_box.curselection(), list_box))
             botao_play.pack(side=tk.LEFT, padx= 5)
             botao_pausa = ctk.CTkButton(botao_frame, text="⏸️", width = 50, font=("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.musicas_iniciais.pause_song())
             botao_pausa.pack(side=tk.LEFT, padx= 5)
-            botao_next = ctk.CTkButton(botao_frame, text=">", width= 50, font=("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.musicas_iniciais.next_song())
+            botao_next = ctk.CTkButton(botao_frame, text=">", width= 50, font=("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.musicas_iniciais.next_song(list_box))
             botao_next.pack(side=tk.LEFT, padx=5)
             botao_adicionar = ctk.CTkButton(botao_frame, text="🎧", width=50, font=("Arial", 18, "bold"),fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.add_to_playlist(list_box.curselection(), list_box))
             botao_adicionar.pack(side=tk.LEFT, padx=5)
 
-            #progress_bar = Progressbar(janela_princiapl, length=300, mode="determinate")
-            #progress_bar.pack(pady= 10)
+            #adicionar aqui uma barra de pesquisa e tres butoes com nome dillaz rihanna king bigs
 
             botao_playlist = ctk.CTkButton(janela_princiapl, text="Playlist 1", width=50, font=("Arial", 18, "bold"),fg_color="#0F5B37", 
                                         hover_color="#0F5B37", cursor="hand2", text_color="white", command=self.janela_playlist)

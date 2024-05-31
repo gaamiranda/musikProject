@@ -1,5 +1,6 @@
 from tkinter import messagebox
 from model.spotify import *
+import tkinter as tk
 
 musicas = {"Cantona": "spotify:track:6mobne6wnkwLGDxF9T7D55", "Cinha": "spotify:track:2rUTqrOSkNZlBG7RnjaQSy", "Qualquer-Feira": "spotify:track:29QDgz4rRKiT2oB0hMgq8E", "Pé no Mar": "spotify:track:4hL6Jr0nOm5erNhCv7FpCT", "Alô": "spotify:track:6vBuEFImAx36hDYiYqBtkZ", "No Fumo No Trabajo (Skit)": "spotify:track:4o2HbQ4QQJqVvvtYfMP6JX", "Habibi": "spotify:track:31w82iq7jsYmPAsM8YChIy", "Hello": "spotify:track:1lkkQTw3ynEq47l42eVn9h", "Hennessy": "spotify:track:6f5Rg365HweagAIch5Tco6", "Direção Paris": "spotify:track:47vme38PigHgHq5YVEzUt8"}
 
@@ -72,16 +73,28 @@ class LinkedListFila:
 			uri = musicas[list_box.get(selected[0])]
 			spoti_play(uri)
 			self.current = self.find_node(uri)
+			list_box.selection_clear(0, tk.END)
+			new_index = list_box.get(0, tk.END).index(self.current.musica)
+			list_box.selection_set(new_index)
+			list_box.see(new_index)
 
-	def next_song(self):
+	def next_song(self, list_box):
 		if self.current and self.current.next:
 			spoti_play(self.current.next.musica_uri)
-		self.current = self.current.next
+			self.current = self.current.next
+			list_box.selection_clear(0, tk.END)
+			new_index = list_box.get(0, tk.END).index(self.current.musica)
+			list_box.selection_set(new_index)
+			list_box.see(new_index)
 
-	def prev_song(self):
+	def prev_song(self, list_box):
 		if self.current and self.current.prev:
 			spoti_play(self.current.prev.musica_uri)
-		self.current = self.current.prev
+			self.current = self.current.prev
+			list_box.selection_clear(0, tk.END)
+			new_index = list_box.get(0, tk.END).index(self.current.musica)
+			list_box.selection_set(new_index)
+			list_box.see(new_index)
 
 	def pause_song(self):
 		spoti_pause()
