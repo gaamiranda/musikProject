@@ -2,7 +2,7 @@ from tkinter import messagebox
 from model.spotify import *
 import tkinter as tk
 
-musicas = {"Cantona": "spotify:track:6mobne6wnkwLGDxF9T7D55", "Cinha": "spotify:track:2rUTqrOSkNZlBG7RnjaQSy", "Qualquer-Feira": "spotify:track:29QDgz4rRKiT2oB0hMgq8E", "Pé no Mar": "spotify:track:4hL6Jr0nOm5erNhCv7FpCT", "Alô": "spotify:track:6vBuEFImAx36hDYiYqBtkZ", "No Fumo No Trabajo (Skit)": "spotify:track:4o2HbQ4QQJqVvvtYfMP6JX", "Habibi": "spotify:track:31w82iq7jsYmPAsM8YChIy", "Hello": "spotify:track:1lkkQTw3ynEq47l42eVn9h", "Hennessy": "spotify:track:6f5Rg365HweagAIch5Tco6", "Direção Paris": "spotify:track:47vme38PigHgHq5YVEzUt8"}
+musicas = {"Cantona": "spotify:track:6mobne6wnkwLGDxF9T7D55", "Diamonds": "spotify:track:4JQSMg83F8qYwSBt5xOXsQ", "We Found Love": "spotify:track:6qn9YLKt13AGvpq9jfO8py", "Gangstanismo": "spotify:track:553OpJwtoshAG2cwIawIbs", "Alô": "spotify:track:6vBuEFImAx36hDYiYqBtkZ", "Biggie Biggie Biggie": "spotify:track:4F4HFW9HdjPaI2MjlQnxVz", "Habibi": "spotify:track:31w82iq7jsYmPAsM8YChIy", "Como é que Tamos": "spotify:track:7D4kUD7DuOHJLnxsfPaOD1", "Umbrella": "spotify:track:49FYlytm3dAAraYgpoJZux", "Erika": "spotify:track:61NcooPUwSPSwSyzF8UfYv"}
 
 class NodeMusica:
 	def __init__(self, musica):

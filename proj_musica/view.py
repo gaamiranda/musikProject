@@ -96,10 +96,6 @@ class View:
                                     activebackground="#0F5B37", fg="white", command=self.registar)
         self.sign_button.place(x=550, y=640)
 
-        #self.destryo = tk.Button(self.login_janela, text="Destroy DATABASE", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", 
-                                    #activebackground="#0F5B37", fg="white", command=self.delete_database)
-        #self.destryo.place(x=550, y=680)
-
     def registar(self):
             self.frame.destroy()
             tela = tk.Toplevel(self.master)
@@ -152,7 +148,7 @@ class View:
 
             list_box = tk.Listbox(janela_princiapl, width= 50, font=("Arial", 16, "bold"))
             list_box.pack(pady=10)
-            list_box.insert(tk.END, "Cantona", "Cinha","Qualquer-Feira", "Pé no Mar","Alô", "No Fumo No Trabajo (Skit)","Habibi", "Hello","Hennessy", "Direção Paris")
+            list_box.insert(tk.END, "Cantona", "Diamonds","We Found Love", "Gangstanismo","Alô", "Biggie Biggie Biggie","Habibi", "Como é que Tamos","Umbrella", "Erika")
             
             
 
@@ -169,7 +165,24 @@ class View:
             botao_adicionar = ctk.CTkButton(botao_frame, text="🎧", width=50, font=("Arial", 18, "bold"),fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.add_to_playlist(list_box.curselection(), list_box))
             botao_adicionar.pack(side=tk.LEFT, padx=5)
 
-            #adicionar aqui uma barra de pesquisa e tres butoes com nome dillaz rihanna king bigs
+            pesquisa_frame = tk.Frame(janela_princiapl)
+            pesquisa_frame.pack(pady=5)
+            barra_pesquisa = ctk.CTkEntry(pesquisa_frame, width=200, font= ("Arial", 18, "bold"))
+            barra_pesquisa.pack(side=ctk.LEFT, padx=5)
+            botao_lupa = ctk.CTkButton(pesquisa_frame, text="🔎", width= 40, font=("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.search_song(barra_pesquisa.get(), list_box))
+            botao_lupa.pack(side=tk.LEFT, padx=5)
+            nomes_frame = tk.Frame(janela_princiapl)
+            nomes_frame.pack(pady=5)
+            botao_dillaz = ctk.CTkButton(nomes_frame, text="Dillaz", width = 50, font= ("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.artist(list_box, "Dillaz"))
+            botao_dillaz.pack(side=tk.LEFT, padx=5)
+            botao_Rihanna = ctk.CTkButton(nomes_frame, text="Rihanna", width = 50, font= ("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.artist(list_box, "Rihanna"))
+            botao_Rihanna.pack(side=tk.LEFT, padx=5)
+            botao_kingbigs = ctk.CTkButton(nomes_frame, text="King Bigs", width = 50, font= ("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.artist(list_box, "King Bigs"))
+            botao_kingbigs.pack(side=tk.LEFT, padx=5)
+            botao_other = ctk.CTkButton(nomes_frame, text="Other", width = 50, font= ("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.artist(list_box, "Other"))
+            botao_other.pack(side=tk.LEFT, padx=5)
+            botao_reset = ctk.CTkButton(nomes_frame, text="Reset", width = 50, font= ("Arial", 18, "bold"), fg_color="#0F5B37", hover_color="#0F5B37", cursor="hand2", text_color="white", command=lambda: self.reset(list_box))
+            botao_reset.pack(side=tk.LEFT, padx=5)
 
             botao_playlist = ctk.CTkButton(janela_princiapl, text="Playlist 1", width=50, font=("Arial", 18, "bold"),fg_color="#0F5B37", 
                                         hover_color="#0F5B37", cursor="hand2", text_color="white", command=self.janela_playlist)
@@ -228,3 +241,25 @@ class View:
                 list_box.insert(tk.END, song)
             messagebox.showinfo("Sucesso", "Música removida com sucesso")
     
+    def search_song(self, song, list_box):
+        if song not in musicas:
+            messagebox.showerror("Erro", "Música não encontrada")
+            return
+        list_box.delete(0, tk.END)
+        list_box.insert(tk.END, song)
+        
+    def reset(self, list_box):
+        list_box.delete(0, tk.END)
+        for musica in musicas:
+            list_box.insert(tk.END, musica)
+
+    def artist(self, list_box, artista):
+        list_box.delete(0, tk.END)
+        if artista == "Dillaz":
+            list_box.insert(tk.END, "Cantona", "Alô", "Habibi")
+        elif artista == "Rihanna":
+            list_box.insert(tk.END, "Diamonds", "We Found Love", "Umbrella")
+        elif artista == "King Bigs":
+            list_box.insert(tk.END, "Gangstanismo", "Biggie Biggie Biggie", "Como é que Tamos")
+        else:
+            list_box.insert(tk.END, "Erika")
