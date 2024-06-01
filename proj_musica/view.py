@@ -86,40 +86,50 @@ class View:
         self.password_pw.place(x=580, y=536, width=190)
         self.linha_pw = tk.Canvas(self.login_janela, width=230, height=2.0, bg='white', highlightthickness=0)
         self.linha_pw.place(x=550, y=560)
+        self.show_password_var = tk.BooleanVar()
+        self.show_password_var.set(False)
+        self.check_button = tk.Checkbutton(self.login_janela, text="Mostrar Password", relief= 'flat', bg='#040405', fg="#6b6a69", font=('Arial', 13, 'bold'), variable=self.show_password_var, command=self.show_password)
+        self.check_button.place(x=545, y=580)
 
         #Botao Login
-        self.login_button = tk.Button(self.login_janela, text="LOGIN", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", activebackground="#0F5B37", fg="white", command= lambda: self.login(self.username_nome.get(), self.password_pw.get()))
-        self.login_button.place(x=550, y=600)
+        self.login_button = tk.Button(self.login_janela, text="LOGIN", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#006400", cursor="hand2", activebackground="#006400", fg="black", command= lambda: self.login(self.username_nome.get(), self.password_pw.get()))
+        self.login_button.place(x=550, y=620)
 
         #registar password
-        self.sign_button = tk.Button(self.login_janela, text="REGISTAR", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", 
-                                    activebackground="#0F5B37", fg="white", command=self.registar)
-        self.sign_button.place(x=550, y=640)
+        self.sign_button = tk.Button(self.login_janela, text="REGISTAR", font=('Arial', 12, 'bold'), width=23, bd=0, bg="black", cursor="hand2", 
+                                    activebackground="black", fg="black", command=self.registar)
+        self.sign_button.place(x=550, y=660)
+
+    def show_password(self):
+        if self.show_password_var.get():
+            self.password_pw.config(show="")
+        else:
+            self.password_pw.config(show="*")
 
     def registar(self):
             self.frame.destroy()
             tela = tk.Toplevel(self.master)
             tela.title("Registo")
-            tela.configure(background="#ffe76c")
-            frame = tk.Frame(tela, bg = "#ffe76c")
+            tela.configure(background="black")
+            frame = tk.Frame(tela, bg = "black")
             frame.pack()
 
-            nome_label = tk.Label(frame, text="Username:", font=('Arial', 14), bg='#ffe76c')
+            nome_label = tk.Label(frame, text="Username:", font=('Arial', 14), bg='green')
             nome_label.pack()
             nome_entry = tk.Entry(frame, font=('Arial', 14))
             nome_entry.pack(pady=5)
             
-            password_label = tk.Label(frame, text="Password:", font=('Arial', 14), bg='#ffe76c')
+            password_label = tk.Label(frame, text="Password:", font=('Arial', 14), bg='green')
             password_label.pack()
             password_entry = tk.Entry(frame, show="*", font=('Arial', 14))
             password_entry.pack(pady=5)
 
-            password_confirmar_label = tk.Label(frame, text="Confirmar Password:", font=('Arial', 14), bg='#ffe76c')
+            password_confirmar_label = tk.Label(frame, text="Confirmar Password:", font=('Arial', 14), bg='green')
             password_confirmar_label.pack()
             password_confirmar_entry = tk.Entry(frame, show="*", font=('Arial', 14))
             password_confirmar_entry.pack(pady=5)
 
-            registar_button = tk.Button(frame, text="Registar", font=('Arial', 14),fg='white', bg='#6d7575', command= lambda: self.users.add_user(nome_entry.get(), password_entry.get(), password_confirmar_entry.get(), self.database, 0))
+            registar_button = tk.Button(frame, text="Registar", font=('Arial', 14),fg='green', bg='black', command= lambda: self.users.add_user(nome_entry.get(), password_entry.get(), password_confirmar_entry.get(), self.database, 0))
             registar_button.pack(pady=10, ipadx=20, ipady=5)
             
 
@@ -148,8 +158,8 @@ class View:
 
             list_box = tk.Listbox(janela_princiapl, width= 50, font=("Arial", 16, "bold"))
             list_box.pack(pady=10)
-            list_box.insert(tk.END, "Cantona", "Diamonds","We Found Love", "Gangstanismo","Alô", "Biggie Biggie Biggie","Habibi", "Como é que Tamos","Umbrella", "Erika")
-            
+            for musica in musicas:
+                list_box.insert(tk.END, musica)
             
 
             botao_frame = tk.Frame(janela_princiapl)
@@ -203,8 +213,8 @@ class View:
         new_window = tk.Toplevel(self.master)
         new_window.title("Admin Panel")
         new_window.geometry('300x200')
-        self.destryo = tk.Button(new_window, text="Destroy DATABASE", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", 
-                                    activebackground="#0F5B37", fg="white", command=self.delete_database)
+        self.destryo = tk.Button(new_window, text="Destroy DATABASE", font=('Arial', 12, 'bold'), width=23, bd=0, bg="green", cursor="hand2", 
+                                    activebackground="green", fg="green", command=self.delete_database)
         self.destryo.pack()
     
     def janela_playlist(self):
