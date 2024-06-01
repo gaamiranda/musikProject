@@ -16,7 +16,7 @@ class View:
         self.master = master
         self.database = DataBase()
         self.users = LinkedListUsers()
-        img = PhotoImage(file= "SpotUal.png")
+        img = PhotoImage(file= "proj_musica\SpotUal.png")
         self.master.iconphoto(False, img)
         self.master.geometry('800x800')
         self.master.resizable(False, False)
@@ -34,13 +34,13 @@ class View:
         self.login_janela = tk.Frame(self.master, bg='black', width='800', height='800')
         self.login_janela.place(x=0, y=0)
 
-        self.linhacima = Image.open("linhacima.png")
+        self.linhacima = Image.open("proj_musica\linhacima.png")
         self.linhacima = self.linhacima.resize((800, 100)) #LANCZOS
         self.linhacima = ImageTk.PhotoImage(self.linhacima)
         self.linhacima_label = tk.Label(self.login_janela, image=self.linhacima, bg='#040405')
         self.linhacima_label.place(x=0, y=0)
 
-        self.linhabaixo = Image.open("linhabaixo.png")
+        self.linhabaixo = Image.open("proj_musica\linhabaixo.png")
         self.linhabaixo = self.linhabaixo.resize((800, 100)) #LANCZOS
         self.linhabaixo = ImageTk.PhotoImage(self.linhabaixo)
         self.linhabaixo_label = tk.Label(self.login_janela, image=self.linhabaixo, bg='#040405')
@@ -48,57 +48,58 @@ class View:
 
 
 
-        self.logo_bv = Image.open("emvindo.png")
+        self.logo_bv = Image.open("proj_musica\emvindo.png")
         self.logo_bv = self.logo_bv.resize((300, 100)) #LANCZOS
         self.logo_bv = ImageTk.PhotoImage(self.logo_bv)
         self.logo_bv_label = tk.Label(self.login_janela, image=self.logo_bv, bg='#040405')
         self.logo_bv_label.place(x=80, y=150)
 
-        #Login
-        self.sign_label = tk.Label (self.login_janela, text="Sign In", bg='#040405', fg='white', font=('Arial', 13, 'bold'))
-        self.sign_label.place(x=640, y=370)
-
-        self.logo = Image.open("SpotUal.png")
+    
+        self.logo = Image.open("proj_musica\SpotUal.png")
         self.logo = self.logo.resize((300, 300)) #LANCZOS
         self.logo = ImageTk.PhotoImage(self.logo)
         self.logo_label = tk.Label(self.login_janela, image=self.logo, bg='#040405')
         self.logo_label.place(x=70, y=330)
 
-        self.logo_user = Image.open("iconuser.png")
+        #Login
+        self.sign_label = tk.Label (self.login_janela, text="Sign In", bg='#040405', fg='white', font=('Arial', 13, 'bold'))
+        self.sign_label.place(x=610, y=260)
+        self.logo_user = Image.open("proj_musica\iconuser.png")
         self.logo_user = self.logo_user.resize((80, 80)) #LANCZOS
         self.logo_user = ImageTk.PhotoImage(self.logo_user)
         self.logo_user_label = tk.Label(self.login_janela, image=self.logo_user, bg='#040405')
-        self.logo_user_label.place(x=630, y=270)
+        self.logo_user_label.place(x=600, y=160)
 
 
         #Username
         self.username_label = tk.Label(self.login_janela, text='Username', relief= 'flat', bg='#040405', fg="#6b6a69", font=('Arial', 13, 'bold'))
-        self.username_label.place(x=550, y=420)
+        self.username_label.place(x=530, y=320)
         self.username_nome = tk.Entry(self.login_janela, highlightthickness=0, relief='flat', bg='#040405', fg='#6b6a69', font=('Arial', 12, 'bold'))
-        self.username_nome.place(x=580, y=456)
+        self.username_nome.place(x=560, y=356)
         self.linha = tk.Canvas(self.login_janela, width=230, height=2.0, bg='white', highlightthickness=0)
-        self.linha.place(x=550, y=480)
+        self.linha.place(x=530, y=380)
 
         #Passsword
         self.password_label = tk.Label(self.login_janela, text='Password', relief= 'flat', bg='#040405', fg="#6b6a69", font=('Arial', 13, 'bold'))
-        self.password_label.place(x=550, y=500)
+        self.password_label.place(x=530, y=400)
         self.password_pw = tk.Entry(self.login_janela, highlightthickness=0, relief='flat', bg='#040405', fg='#6b6a69', font=('Arial', 12, 'bold'), show="*" )
-        self.password_pw.place(x=580, y=536, width=190)
+        self.password_pw.place(x=560, y=436, width=190)
         self.linha_pw = tk.Canvas(self.login_janela, width=230, height=2.0, bg='white', highlightthickness=0)
-        self.linha_pw.place(x=550, y=560)
+        self.linha_pw.place(x=530, y=460)
         self.show_password_var = tk.BooleanVar()
         self.show_password_var.set(False)
-        self.check_button = tk.Checkbutton(self.login_janela, text="Mostrar Password", relief= 'flat', bg='#040405', fg="#6b6a69", font=('Arial', 13, 'bold'), variable=self.show_password_var, command=self.show_password)
-        self.check_button.place(x=545, y=580)
+        self.check_button = tk.Checkbutton(self.login_janela, text="Mostrar Password", relief= 'flat', bg='#040405', fg="#6b6a69", activeforeground="#6b6a69", activebackground="black", background="black",font=('Arial', 13, 'bold'), variable=self.show_password_var, command=self.show_password)
+        self.check_button.place(x=530, y=480)
+
 
         #Botao Login
-        self.login_button = tk.Button(self.login_janela, text="LOGIN", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#006400", cursor="hand2", activebackground="#006400", fg="black", command= lambda: self.login(self.username_nome.get(), self.password_pw.get()))
-        self.login_button.place(x=550, y=620)
+        self.login_button = tk.Button(self.login_janela, text="LOGIN", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", activebackground="#0F5B37", fg="white", command= lambda: self.login(self.username_nome.get(), self.password_pw.get()))
+        self.login_button.place(x=530, y=530)
 
         #registar password
-        self.sign_button = tk.Button(self.login_janela, text="REGISTAR", font=('Arial', 12, 'bold'), width=23, bd=0, bg="black", cursor="hand2", 
-                                    activebackground="black", fg="black", command=self.registar)
-        self.sign_button.place(x=550, y=660)
+        self.sign_button = tk.Button(self.login_janela, text="REGISTAR", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", 
+                                    activebackground="#0F5B37", fg="white", command=self.registar)
+        self.sign_button.place(x=530, y=570)
 
     def show_password(self):
         if self.show_password_var.get():
@@ -114,22 +115,22 @@ class View:
             frame = tk.Frame(tela, bg = "black")
             frame.pack()
 
-            nome_label = tk.Label(frame, text="Username:", font=('Arial', 14), bg='green')
+            nome_label = tk.Label(frame, text="Username:", font=('Arial', 14), bg='black', fg="white")
             nome_label.pack()
             nome_entry = tk.Entry(frame, font=('Arial', 14))
             nome_entry.pack(pady=5)
             
-            password_label = tk.Label(frame, text="Password:", font=('Arial', 14), bg='green')
+            password_label = tk.Label(frame, text="Password:", font=('Arial', 14), bg='black', fg="white")
             password_label.pack()
             password_entry = tk.Entry(frame, show="*", font=('Arial', 14))
             password_entry.pack(pady=5)
 
-            password_confirmar_label = tk.Label(frame, text="Confirmar Password:", font=('Arial', 14), bg='green')
+            password_confirmar_label = tk.Label(frame, text="Confirmar Password:", font=('Arial', 14), bg='black', fg="white")
             password_confirmar_label.pack()
             password_confirmar_entry = tk.Entry(frame, show="*", font=('Arial', 14))
             password_confirmar_entry.pack(pady=5)
 
-            registar_button = tk.Button(frame, text="Registar", font=('Arial', 14),fg='green', bg='black', command= lambda: self.users.add_user(nome_entry.get(), password_entry.get(), password_confirmar_entry.get(), self.database, 0))
+            registar_button = tk.Button(frame, text="Registar", font=('Arial', 14),fg='white', bg='#0F5B37', command= lambda: self.users.add_user(nome_entry.get(), password_entry.get(), password_confirmar_entry.get(), self.database, 0))
             registar_button.pack(pady=10, ipadx=20, ipady=5)
             
 
@@ -152,14 +153,14 @@ class View:
             janela_princiapl = tk.Toplevel(self.master)
             janela_princiapl.title("SpotUal")
             janela_princiapl.geometry("600x500")
-            img = PhotoImage(file= "icon.png")
+            img = PhotoImage(file= "proj_musica\icon.png")
             janela_princiapl.iconphoto(False, img)
             janela_princiapl.protocol("WM_DELETE_WINDOW", self.master.destroy)
 
             list_box = tk.Listbox(janela_princiapl, width= 50, font=("Arial", 16, "bold"))
             list_box.pack(pady=10)
-            for musica in musicas:
-                list_box.insert(tk.END, musica)
+            list_box.insert(tk.END, "Cantona", "Diamonds","We Found Love", "Gangstanismo","Alô", "Biggie Biggie Biggie","Habibi", "Como é que Tamos","Umbrella", "Erika")
+            
             
 
             botao_frame = tk.Frame(janela_princiapl)
@@ -198,7 +199,6 @@ class View:
                                         hover_color="#0F5B37", cursor="hand2", text_color="white", command=self.janela_playlist)
             botao_playlist.pack(side=tk.LEFT, padx=5)
             
-        
     
     def load_clients(self):
         for nome, password in self.database.fetch_clientes():
@@ -213,8 +213,8 @@ class View:
         new_window = tk.Toplevel(self.master)
         new_window.title("Admin Panel")
         new_window.geometry('300x200')
-        self.destryo = tk.Button(new_window, text="Destroy DATABASE", font=('Arial', 12, 'bold'), width=23, bd=0, bg="green", cursor="hand2", 
-                                    activebackground="green", fg="green", command=self.delete_database)
+        self.destryo = tk.Button(new_window, text="Destroy DATABASE", font=('Arial', 12, 'bold'), width=23, bd=0, bg="#0F5B37", cursor="hand2", 
+                                    activebackground="#0F5B37", fg="white", command=self.delete_database)
         self.destryo.pack()
     
     def janela_playlist(self):
