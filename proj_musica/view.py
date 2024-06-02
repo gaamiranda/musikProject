@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter
 import customtkinter as ctk 
 from tkinter import *
 from tkinter.ttk import Progressbar
@@ -16,7 +17,7 @@ class View:
         self.master = master
         self.database = DataBase()
         self.users = LinkedListUsers()
-        img = PhotoImage(file= "proj_musica\SpotUal.png")
+        img = PhotoImage(file= "SpotUal.png")
         self.master.iconphoto(False, img)
         self.master.geometry('800x800')
         self.master.resizable(False, False)
@@ -34,13 +35,13 @@ class View:
         self.login_janela = tk.Frame(self.master, bg='black', width='800', height='800')
         self.login_janela.place(x=0, y=0)
 
-        self.linhacima = Image.open("proj_musica\linhacima.png")
+        self.linhacima = Image.open("linhacima.png")
         self.linhacima = self.linhacima.resize((800, 100)) #LANCZOS
         self.linhacima = ImageTk.PhotoImage(self.linhacima)
         self.linhacima_label = tk.Label(self.login_janela, image=self.linhacima, bg='#040405')
         self.linhacima_label.place(x=0, y=0)
 
-        self.linhabaixo = Image.open("proj_musica\linhabaixo.png")
+        self.linhabaixo = Image.open("linhabaixo.png")
         self.linhabaixo = self.linhabaixo.resize((800, 100)) #LANCZOS
         self.linhabaixo = ImageTk.PhotoImage(self.linhabaixo)
         self.linhabaixo_label = tk.Label(self.login_janela, image=self.linhabaixo, bg='#040405')
@@ -48,14 +49,14 @@ class View:
 
 
 
-        self.logo_bv = Image.open("proj_musica\emvindo.png")
+        self.logo_bv = Image.open("emvindo.png")
         self.logo_bv = self.logo_bv.resize((300, 100)) #LANCZOS
         self.logo_bv = ImageTk.PhotoImage(self.logo_bv)
         self.logo_bv_label = tk.Label(self.login_janela, image=self.logo_bv, bg='#040405')
         self.logo_bv_label.place(x=80, y=150)
 
     
-        self.logo = Image.open("proj_musica\SpotUal.png")
+        self.logo = Image.open("SpotUal.png")
         self.logo = self.logo.resize((300, 300)) #LANCZOS
         self.logo = ImageTk.PhotoImage(self.logo)
         self.logo_label = tk.Label(self.login_janela, image=self.logo, bg='#040405')
@@ -64,7 +65,7 @@ class View:
         #Login
         self.sign_label = tk.Label (self.login_janela, text="Sign In", bg='#040405', fg='white', font=('Arial', 13, 'bold'))
         self.sign_label.place(x=610, y=260)
-        self.logo_user = Image.open("proj_musica\iconuser.png")
+        self.logo_user = Image.open("iconuser.png")
         self.logo_user = self.logo_user.resize((80, 80)) #LANCZOS
         self.logo_user = ImageTk.PhotoImage(self.logo_user)
         self.logo_user_label = tk.Label(self.login_janela, image=self.logo_user, bg='#040405')
@@ -111,28 +112,44 @@ class View:
             self.frame.destroy()
             tela = tk.Toplevel(self.master)
             tela.title("Registo")
-            tela.configure(background="black")
-            frame = tk.Frame(tela, bg = "black")
+            tela.resizable(False, False)
+            tela.geometry("500x500")
+            tela.configure(background="#2B2B2B")
+            frame = tk.Frame(tela, width=500, height=500)
             frame.pack()
 
-            nome_label = tk.Label(frame, text="Username:", font=('Arial', 14), bg='black', fg="white")
-            nome_label.pack()
-            nome_entry = tk.Entry(frame, font=('Arial', 14))
-            nome_entry.pack(pady=5)
-            
-            password_label = tk.Label(frame, text="Password:", font=('Arial', 14), bg='black', fg="white")
-            password_label.pack()
-            password_entry = tk.Entry(frame, show="*", font=('Arial', 14))
-            password_entry.pack(pady=5)
+            imagem_pil = Image.open("egistar.png")  # Substitua pelo caminho da sua imagem
+            imagem = ImageTk.PhotoImage(imagem_pil)
+            imagem_label = tk.Label(frame, image=imagem)
+            imagem_label.image = imagem  # Manter uma referência para a imagem
+            imagem_label.pack(pady=0)
 
-            password_confirmar_label = tk.Label(frame, text="Confirmar Password:", font=('Arial', 14), bg='black', fg="white")
-            password_confirmar_label.pack()
-            password_confirmar_entry = tk.Entry(frame, show="*", font=('Arial', 14))
-            password_confirmar_entry.pack(pady=5)
+            frame2 = ctk.CTkFrame(imagem_label, width=320, height=360, corner_radius= 15, bg_color="#2B2B2B")
+            frame2.place(relx= 0.5, rely=0.5, anchor=tkinter.CENTER)
 
-            registar_button = tk.Button(frame, text="Registar", font=('Arial', 14),fg='white', bg='#0F5B37', command= lambda: self.users.add_user(nome_entry.get(), password_entry.get(), password_confirmar_entry.get(), self.database, 0))
-            registar_button.pack(pady=10, ipadx=20, ipady=5)
+            registar = ctk.CTkLabel(frame2, width= 220, text= "Criar Conta", font=('Century Gothic', 20))
+            registar.place(x=50, y=45)
+
+            nome_entry = ctk.CTkEntry(frame2, width=220, placeholder_text="Username")
+            nome_entry.place(x=50, y=110)
+
+            password_entry = ctk.CTkEntry(frame2, width=220, placeholder_text="Password", show="*")
+            password_entry.place(x=50, y=165)
+
+            password_confirmar_entry = ctk.CTkEntry(frame2, width=220, placeholder_text="Confirmar Password", show="*")
+            password_confirmar_entry.place(x=50, y=220)
+
+            show_password_var = tk.BooleanVar()
+            show_password_var.set(False)
+            check_button = ctk.CTkCheckBox(frame2, width= 80, text="Mostrar Password", font=('Arial', 13, 'bold'))
+            check_button.place(x=50, y=260)
+
+            registar_button = ctk.CTkButton(frame2, width= 220, text="Registar", font=('Arial', 14), fg_color="#0F5B37", hover_color="#0F5B37", corner_radius=15,
+                                            command= lambda: self.users.add_user(nome_entry.get(), password_entry.get(), 
+                                            password_confirmar_entry.get(), self.database, 0))
+            registar_button.place(x=50, y=300)
             
+        
 
     def login(self, nome, password):
         if nome == "admin" and password == "admin":
@@ -153,7 +170,7 @@ class View:
             janela_princiapl = tk.Toplevel(self.master)
             janela_princiapl.title("SpotUal")
             janela_princiapl.geometry("600x500")
-            img = PhotoImage(file= "proj_musica\icon.png")
+            img = PhotoImage(file= "icon.png")
             janela_princiapl.iconphoto(False, img)
             janela_princiapl.protocol("WM_DELETE_WINDOW", self.master.destroy)
 
